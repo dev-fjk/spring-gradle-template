@@ -1,11 +1,10 @@
-# Google Editor Config
 root = true
 
 [*]
 indent_style = space
-indent_size = 2
+indent_size = 4
 end_of_line = lf
 charset = utf-8
+max_line_length = 120
 trim_trailing_whitespace = true
 insert_final_newline = true
-© 2021 GitHub, Inc.

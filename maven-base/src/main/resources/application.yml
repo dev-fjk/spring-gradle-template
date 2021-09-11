@@ -6,11 +6,11 @@ spring:
     encoding: UTF-8
   jackson:
     time-zone: "Asia/Tokyo"
-    
+
 logging:
   level:
-    web: debug    
-    
+    web: debug
+
 ---
 spring:
   profiles:
