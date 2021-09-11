@@ -16,4 +16,5 @@ class SampleTest {
     public void sumTest() {
         assertEquals(3, target.sum(1, 2));
     }
+
 }
