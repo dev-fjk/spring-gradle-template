@@ -18,6 +18,11 @@
     <properties>
         <java.version>11</java.version>
         <spock.version>2.0-groovy-3.0</spock.version>
+
+        <test.include.java>**/*.java</test.include.java>
+        <test.exclude.java>.</test.exclude.java>
+        <test.include.groovy>**/*.groovy</test.include.groovy>
+        <test.exclude.groovy>.</test.exclude.groovy>
     </properties>
 
     <dependencies>
@@ -173,7 +178,8 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- テスト用設定 -->
+
+            <!-- spock テスト用設定 -->
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
@@ -188,16 +194,66 @@
                 <configuration>
                     <testSources>
                         <testSource>
-                            <directory>${project.basedir}/src/test</directory>
+                            <directory>${project.basedir}/src/test/groovy</directory>
                             <includes>
-                                <!-- testだけgroovyも対象に設定 -->
-                                <include>**/*.java</include>
-                                <include>**/*.groovy</include>
+                                <include>${test.include.groovy}</include>
                             </includes>
+                            <excludes>
+                                <exclude>${test.exclude.groovy}</exclude>
+                            </excludes>
                         </testSource>
                     </testSources>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.2</version>
+                <configuration>
+                    <failIfNoTests>true</failIfNoTests>
+                    <includes>
+                        <include>**/*Test.class</include>
+                        <include>**/*Spec.class</include>
+                    </includes>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.apache.maven.surefire</groupId>
+                        <artifactId>surefire-junit47</artifactId>
+                        <version>3.0.0-M5</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- for Junit -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <executions>
+                    <execution>
+                        <id>default-testCompile</id>
+                        <phase>test-compile</phase>
+                        <configuration>
+                            <testIncludes>
+                                <include>${test.include.java}</include>
+                            </testIncludes>
+                            <testExcludes>
+                                <exclude>${test.exclude.java}</exclude>
+                            </testExcludes>
+                        </configuration>
+                    </execution>
+                </executions>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                    <jdkToolchain>
+                        <version>11</version>
+                    </jdkToolchain>
+                </configuration>
+            </plugin>
+
             <!-- jacoco カバレッジレポート設定 target/jacoco-ut/index.html でテストのソース網羅率を確認できる-->
             <plugin>
                 <groupId>org.jacoco</groupId>
@@ -235,23 +291,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.maven.surefire</groupId>
-                        <artifactId>surefire-junit47</artifactId>
-                        <version>3.0.0-M5</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <includes>
-                        <include>**/*Test.class</include>
-                        <include>**/*Spec.class</include>
-                    </includes>
-                </configuration>
             </plugin>
         </plugins>
     </build>
