@@ -1,2 +1,2 @@
 # spring-gradle-template
-gradle使用時のtemplateProject
+gradle使用時のテンプレートリポジトリ
