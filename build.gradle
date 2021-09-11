@@ -1,3 +1,4 @@
+//file:noinspection GroovyAssignabilityCheck
 plugins {
     id 'org.springframework.boot' version '2.5.4'
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
@@ -83,7 +84,17 @@ jacoco {
     reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir') as Directory
 }
 
-// jacoco Reportの設定
+// jacocoのレポートから除外するクラスファイル。ここに除外したいクラスを列挙する
+def coverageExcludeFiles = [
+        '**/*$*.class',
+        '**/*$*.java',
+        '**/*$lambda$*.class',
+        '**/dto/*',
+        '**/entity/*',
+        '**/*Exception.class'
+]
+
+// jacocoレポートの設定
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
     reports {
@@ -93,4 +104,13 @@ jacocoTestReport {
         // htmlレポート出力先
         html.outputLocation = layout.buildDirectory.dir('jacoco')
     }
+    afterEvaluate {
+        // ファイルの除外設定
+        classDirectories.setFrom(classDirectories.files.collect {
+            fileTree(
+                    dir: it,
+                    excludes: coverageExcludeFiles)
+        })
+    }
 }
+
