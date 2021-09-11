@@ -9,5 +9,4 @@ class MavenBaseApplicationTests {
     @Test
     void contextLoads() {
     }
-
 }
