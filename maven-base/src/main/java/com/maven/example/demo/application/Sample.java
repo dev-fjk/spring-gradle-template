@@ -10,6 +10,7 @@ public class Sample {
 
 	public int sum(int a, int b) {
 		log.info("sum START");
+		log.info("intellij test");
 
 		int result = a + b;
 
