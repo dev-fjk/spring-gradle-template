@@ -8,12 +8,8 @@ import org.springframework.stereotype.Component;
 public class Sample {
 
     public int sum(int a, int b) {
-        log.info("sum START");
-
-        int result = a + b;
-
-        log.info("result : {}", result);
-        log.info("sum END");
-        return result;
+        SampleInfo info = new SampleInfo();
+        System.out.println(info.getName());
+        return a + b;
     }
 }
