@@ -8,14 +8,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class Sample {
 
-	public int sum(int a, int b) {
-		log.info("sum START");
-		log.info("intellij test");
+  public int sum(int a, int b) {
+    log.info("sum START");
+    log.info("intellij test");
 
-		int result = a + b;
+    int result = a + b;
 
-		log.info("result : {}", result);
-		log.info("sum END");
-		return result;
-	}
+    log.info("result : {}", result);
+    log.info("sum END");
+    return result;
+  }
 }
