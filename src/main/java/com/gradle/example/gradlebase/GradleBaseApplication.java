@@ -9,5 +9,4 @@ public class GradleBaseApplication {
     public static void main(String[] args) {
         SpringApplication.run(GradleBaseApplication.class, args);
     }
-
 }
