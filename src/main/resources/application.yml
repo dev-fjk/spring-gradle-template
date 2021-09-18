@@ -14,4 +14,4 @@ logging:
 ---
 spring:
   profiles:
-    active: local
+    default: local
