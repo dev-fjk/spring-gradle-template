@@ -5,6 +5,12 @@ on:
     branches:
       - master
       - main
+  pull_request:
+    # master/develop/main ブランチ向けのPRでmaven testを実行
+    branches:
+      - master
+      - main
+      - develop
   release:
     types: [created]
 
@@ -25,5 +31,8 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Change gradlew permissions
+      run: chmod +x ./gradlew
+
     - name: gradle test
-      run: ./gradlew build
+      run: ./gradlew test
