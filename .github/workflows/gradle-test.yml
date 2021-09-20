@@ -8,7 +8,7 @@ on:
       - '!master'
       - '!main'
   pull_request:
-    # master/develop/main ブランチ向けのPRでmaven testを実行
+    # master/develop/main ブランチ向けのPRで gradle testを実行
     branches:
       - master
       - main
