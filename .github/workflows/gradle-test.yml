@@ -2,9 +2,11 @@ name: Gradle Test
 
 on:
   push:
+    # publishの方で gradle build　を動かしている関係でmaster/main以外にpushした場合に testを動かす
     branches:
-      - master
-      - main
+      - '**'
+      - '!master'
+      - '!main'
   pull_request:
     # master/develop/main ブランチ向けのPRでmaven testを実行
     branches:

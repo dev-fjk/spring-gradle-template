@@ -4,12 +4,15 @@
 name: Gradle Package
 
 on:
+  push:
+    branches:
+      - master
+      - main
   release:
     types: [created]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -25,13 +28,17 @@ jobs:
         server-id: github # Value of the distributionManagement/repository/id field of the pom.xml
         settings-path: ${{ github.workspace }} # location for the settings.xml file
 
+    - name: Change gradlew permissions
+      run: chmod +x ./gradlew
+
     - name: Build with Gradle
-      run: gradle build
+      run: ./gradlew build
 
     # The USERNAME and TOKEN need to correspond to the credentials environment variables used in
     # the publishing section of your build.gradle
-    - name: Publish to GitHub Packages
-      run: gradle publish
-      env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#   # TODO image publish先のDockerコンテナなどの準備が必要なので一旦テンプレートの状態そのまま
+#    - name: Publish to GitHub Packages
+#      run: gradle publish
+#      env:
+#        USERNAME: ${{ github.actor }}
+#        TOKEN: ${{ secrets.GITHUB_TOKEN }}
