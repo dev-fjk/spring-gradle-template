@@ -1,7 +1,7 @@
 ---
 spring:
   application:
-    name: spring-gradle-template
+    name: gradle-base
   messages:
     encoding: UTF-8
   jackson:
