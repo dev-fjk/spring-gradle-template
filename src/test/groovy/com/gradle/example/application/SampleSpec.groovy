@@ -1,4 +1,4 @@
-package com.gradle.example.gradlebase.application
+package com.gradle.example.application
 
 import spock.lang.Specification
 

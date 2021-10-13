@@ -1,4 +1,4 @@
-package com.gradle.example.gradlebase.config;
+package com.gradle.example.config;
 
 import java.time.Clock;
 import java.time.ZoneId;
